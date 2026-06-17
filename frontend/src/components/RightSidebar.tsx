@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useStore } from '../store'
 import { useMatchSummary } from '../api'
 
@@ -54,7 +55,7 @@ export default function RightSidebar() {
   )
 }
 
-function StatGrid({ children }: { children: React.ReactNode }) {
+function StatGrid({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-2 gap-2">{children}</div>
 }
 

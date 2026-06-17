@@ -17,13 +17,13 @@ export default function EventLayer() {
   const filtered = useMemo(() => {
     if (!data) return []
     return data.events.filter((e) => {
+      if (!activeEventTypes.includes(e.event)) return false
       if (!showBots && e.is_bot) return false
       if (!showHumans && !e.is_bot) return false
-      // If playback active, only show events up to current time
       if (playbackMs > 0 && e.ts_elapsed_ms > playbackMs) return false
       return true
     })
-  }, [data, showBots, showHumans, playbackMs])
+  }, [data, activeEventTypes, showBots, showHumans, playbackMs])
 
   useEffect(() => {
     if (layerRef.current) {

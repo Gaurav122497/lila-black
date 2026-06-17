@@ -17,7 +17,7 @@ export const useStore = create<AppState>((set) => ({
   isPlaying: false,
   activeEventTypes: ALL_EVENTS,
 
-  setSelectedMap: (map) => set({ selectedMap: map, selectedMatch: null, heatmapType: null, playbackMs: 0 }),
+  setSelectedMap: (map) => set({ selectedMap: map, selectedMatch: null, heatmapType: null, playbackMs: 0, isPlaying: false }),
   setSelectedMatch: (match) => set({ selectedMatch: match, playbackMs: 0, isPlaying: false }),
   setSelectedDates: (dates) => set({ selectedDates: dates }),
   setShowBots: (v) => set({ showBots: v }),

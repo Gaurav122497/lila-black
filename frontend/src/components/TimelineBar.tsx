@@ -13,6 +13,13 @@ export default function TimelineBar() {
   const rafRef = useRef<number>(0)
   const lastTRef = useRef<number>(0)
 
+  // Stop playback when we reach the end
+  useEffect(() => {
+    if (isPlaying && duration > 0 && playbackMs >= duration) {
+      setIsPlaying(false)
+    }
+  }, [playbackMs, duration, isPlaying, setIsPlaying])
+
   useEffect(() => {
     if (!isPlaying) {
       cancelAnimationFrame(rafRef.current)
@@ -26,11 +33,7 @@ export default function TimelineBar() {
 
       setPlaybackMs((prev) => {
         const next = prev + delta * 5  // 5x speed
-        if (next >= duration) {
-          setIsPlaying(false)
-          return duration
-        }
-        return next
+        return next >= duration ? duration : next
       })
 
       rafRef.current = requestAnimationFrame(tick)
@@ -39,7 +42,7 @@ export default function TimelineBar() {
     lastTRef.current = 0
     rafRef.current = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [isPlaying, duration, setPlaybackMs, setIsPlaying])
+  }, [isPlaying, duration, setPlaybackMs])
 
   if (!selectedMatch) {
     return (
