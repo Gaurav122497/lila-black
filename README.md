@@ -2,7 +2,11 @@
 
 A production-quality web application for Level Designers to visualise player behaviour from Battle Royale match telemetry. Built as a take-home assignment for the Product Engineer role at LILA Games.
 
-**Live demo:** _[Railway + Vercel URLs after deployment]_
+**Live demo:** https://frontend-nu-ruby-99.vercel.app
+
+**API:** https://lila-black-backend-production.up.railway.app/docs
+
+**GitHub:** https://github.com/Gaurav122497/lila-black
 
 ---
 
