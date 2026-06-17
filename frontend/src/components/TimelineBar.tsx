@@ -29,13 +29,18 @@ export default function TimelineBar() {
     function tick(now: number) {
       if (lastTRef.current === 0) lastTRef.current = now
       const delta = now - lastTRef.current
-      lastTRef.current = now
 
+      // Throttle to 200ms steps — prevents rebuilding Leaflet layers 60×/sec
+      if (delta < 200) {
+        rafRef.current = requestAnimationFrame(tick)
+        return
+      }
+
+      lastTRef.current = now
       setPlaybackMs((prev) => {
-        const next = prev + delta * 5  // 5x speed
+        const next = prev + delta * 5  // 5× speed
         return next >= duration ? duration : next
       })
-
       rafRef.current = requestAnimationFrame(tick)
     }
 
